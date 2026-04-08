@@ -3,6 +3,8 @@ A clean, responsive, and interactive finance dashboard built using React and Red
 
 # Live Demo
 
+https://finance-dashboard-six-xi.vercel.app/
+
 # Project Overview
 This project was built as part of a Frontend Developer Intern assignment to demonstrate:
 UI/UX design thinking, 
