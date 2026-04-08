@@ -25,6 +25,10 @@ const categoryColors =
 export default function Transactions({ open, setOpen })
 {
   const { list } = useSelector(state => state.transactions);
+
+  const [search, setSearch] = useState("");
+  
+  const [filter, setFilter] = useState("all");
   
   const dispatch = useDispatch();
 
@@ -68,13 +72,36 @@ export default function Transactions({ open, setOpen })
         setOpen(false);
       };
       
+      const filteredList = list.filter(t =>
+        {
+          const matchesSearch = t.category.toLowerCase().includes(search.toLowerCase());
+          
+          const matchesFilter = filter === "all" ? true : t.type === filter;
+          
+          return matchesSearch && matchesFilter;
+        });
+      
       return (
 
         <div>
+          
+          <div className="filters">
+
+            <input type="text" placeholder="Search by category..." value={search} onChange={(e) => setSearch(e.target.value)}/>
+
+            <select value={filter} onChange={(e) => setFilter(e.target.value)}>
+
+              <option value="all">All</option>
+              <option value="income">Income</option>
+              <option value="expense">Expense</option>
+
+            </select>
+
+          </div>
 
           <h3>Recent Transactions</h3>
           
-          {list.map(t => (
+          {filteredList.map(t => (
 
             <div className="txn-card" key={t.id}>
 
@@ -102,6 +129,10 @@ export default function Transactions({ open, setOpen })
 
             </div>
           ))}
+
+          {filteredList.length === 0 && (
+            <p style={{ textAlign: "center", color: "#6b7280" }}>No transactions found</p>
+          )}
           
           {/* Modal */}
           
