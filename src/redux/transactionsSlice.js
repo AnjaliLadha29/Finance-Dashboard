@@ -1,28 +1,33 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { mockTransactions } from "../data/mockData";
 
-const transactionsSlice = createSlice({
+const initialState = {
+  list: mockTransactions
+};
 
+const transactionsSlice = createSlice({
   name: "transactions",
-  initialState: {
-    list: mockTransactions,
-    filter: "all",
-    search: ""
-  },
+  initialState,
 
   reducers: {
+
     addTransaction: (state, action) => {
       state.list.push(action.payload);
     },
-    setFilter: (state, action) => {
-      state.filter = action.payload;
-    },
-    setSearch: (state, action) => {
-      state.search = action.payload;
+
+    deleteTransaction: (state, action) => {
+      state.list = state.list.filter(
+        (transaction) => transaction.id !== action.payload
+      );
     }
+
   }
-  
+
 });
 
-export const { addTransaction, setFilter, setSearch } = transactionsSlice.actions;
+export const {
+  addTransaction,
+  deleteTransaction
+} = transactionsSlice.actions;
+
 export default transactionsSlice.reducer;
