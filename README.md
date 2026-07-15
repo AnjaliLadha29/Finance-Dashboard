@@ -12,7 +12,7 @@ Component-based architecture,
 State management using Redux, 
 Responsive and modern frontend development.
 
-The goal was to create a simple yet intuitive financial dashboard without relying on backend services.
+The goal was to create a simple yet intuitive financial dashboard.
 
 # Features
 
@@ -36,6 +36,11 @@ Filter by type.
 
 # Add Transaction
 Can add new transactions via a simple form.
+Updates global state using Redux.
+UI updates instantly without reload.
+
+# Delete Transaction
+Can delete transactions via delete button.
 Updates global state using Redux.
 UI updates instantly without reload.
 
