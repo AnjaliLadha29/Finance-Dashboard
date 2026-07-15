@@ -1,68 +1,49 @@
-import { useState } from "react";
+import { createSlice } from "@reduxjs/toolkit";
 
-import Dashboard from "./components/Dashboard/Dashboard";
+const initialState = {
 
-import Transactions from "./components/Transactions/Transactions";
+  theme: "light",
+  loading: false,
+  toast: null
+};
 
-import Insights from "./components/Insights/Insights";
+const uiSlice = createSlice({
 
-export default function App()
+  name: "ui",
+  initialState,
 
+  reducers: {
+
+    setTheme: (state, action) => {
+      state.theme = action.payload;
+    },
+
+    setLoading: (state, action) => {
+      state.loading = action.payload;
+    },
+
+    showToast: (state, action) => {
+      state.toast = action.payload;
+    },
+
+    hideToast: (state) => {
+      state.toast = null;
+    }
+
+  }
+
+});
+
+export const
 {
+  setTheme,
 
-  const [open, setOpen] = useState(false);
+  setLoading,
 
-  return (
+  showToast,
 
-    <main className="app">
+  hideToast
 
-      <header className="app-header">
+} = uiSlice.actions;
 
-        <h1>
-          Smart Mini Ledger
-        </h1>
-
-        <p>
-          Track your income and expenses easily
-        </p>
-
-      </header>
-
-
-      <section className="dashboard-section">
-
-        <Dashboard />
-
-      </section>
-
-
-      <section className="transactions-section">
-
-        <Transactions
-          open={open}
-          setOpen={setOpen}
-        />
-
-      </section>
-
-
-      <section className="insights-section">
-
-        <Insights />
-
-      </section>
-
-
-      <button
-        className="fab"
-        onClick={() => setOpen(true)}
-        aria-label="Add transaction"
-      >
-        +
-      </button>
-
-
-    </main>
-
-  );
-}
+export default uiSlice.reducer;
